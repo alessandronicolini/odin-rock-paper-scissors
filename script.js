@@ -1,38 +1,54 @@
 "use strict"
+const selections = ["rock", "scissors", "paper",];
+const buttons = document.querySelectorAll('.btn');
+const scoreContainers = document.querySelectorAll('.score');
+const messageContainer = document.querySelector('.message');
+let scores = {
+    player: 0,
+    computer: 0,
+}
 
-const selections = ["Rock", "Scissors", "Paper",];
+function getScoreText(playerName, scoreValue) {
+    return `${playerName} score: ${scoreValue}`;
+}
+
+function showCurrentScores() {
+    scoreContainers.forEach(container => {
+        let playerName = container.getAttribute('id');
+        container.textContent = getScoreText(playerName, scores[playerName]);
+    });
+}
 
 function getComputerChoice() {
     let idx = Math.floor(Math.random()*3);
     return selections[idx];
 }
 
-function playRound(playerSelection, computerSelection) {
-    let [ps, cs] = [playerSelection.toLowerCase(), computerSelection.toLowerCase()];
+function playRound(playerChoice, computerChoice) {
     let resultMessage = "";
-    switch (ps) {
+    switch (playerChoice) {
         case "rock":
-            if (cs == "scissors") {
+            if (computerChoice == "scissors") {
                 resultMessage = "You win! Rock beats Scissors";
-            } else if (cs == "paper") {
+            } else if (computerChoice == "paper") {
                 resultMessage = "You lose! Paper beats Rock";
             } else {
                 resultMessage = "You are tied";
             }
             break;
         case "scissors":
-            if (cs == "paper") {
+            if (computerChoice == "paper") {
                 resultMessage = "You win! Scissors beats Paper";
-            } else if (cs == "rock") {
+            } else if (computerChoice == "rock") {
                 resultMessage = "You lose! Rock beats Scissors";
             } else {
                 resultMessage = "You are tied";
             }
             break;
         case "paper":
-            if (cs == "rock") {
+            if (computerChoice == "rock") {
                 resultMessage = "You win! Paper beats Rock";
-            } else if (cs == "scissors") {
+            } else if (computerChoice == "scissors") {
                 resultMessage = "You lose! Scissors beats Paper";
             } else {
                 resultMessage = "You are tied";
@@ -42,26 +58,19 @@ function playRound(playerSelection, computerSelection) {
     return resultMessage;
 }
 
-function game(){
-    let score = [0, 0];
-    for (let i = 0; i < 5; i++) {
-        let playerSelection = prompt("Insert your choice:");
-        let resultMessage = playRound(playerSelection, getComputerChoice());
-        if (resultMessage.includes("win")) {
-            score[0] += 1;
-        } else if (resultMessage.includes("lose")) {
-            score[1] += 1;
-        };
-        console.log(resultMessage);
-        console.log(`score: ${score[0]} - ${score[1]}`);
-    }
-    if (score[0] > score[1]) {
-        console.log("YOU WIN THE GAME!");
-    } else if (score[1] > score[0]){
-        console.log("YOU LOSE THE GAME!");
-    } else {
-        console.log("YOU ARE TIED, PLAY AGAIN!");
-    }
-}
+messageContainer.textContent = "Let's start the game!";
+showCurrentScores();
 
-game();
+buttons.forEach(button => {
+    button.addEventListener('click', function(e){
+        let message = playRound(e.target.getAttribute('id'), getComputerChoice());
+        console.log(message);
+        messageContainer.textContent = message;
+        if (message.includes("win")) {
+            scores.player += 1;
+        } else if (message.includes("lose")) {
+            scores.computer += 1;
+        };
+        showCurrentScores();
+    });
+});
