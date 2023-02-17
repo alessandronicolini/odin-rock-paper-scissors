@@ -1,5 +1,6 @@
 export default class View {
     constructor() {
+        console.log('test');
         this._roundOutcomeMessage = this._getDomElement('.result-message');
         this._scoreDisplay = this._getDomElement('.score-text');
         this._playerChoiceSmall = this._getDomElement('.player-left img');
