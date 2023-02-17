@@ -7,19 +7,54 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600&family=Mulish">
     </head>
     <body>
-        <script src="script.js" defer></script>
-        <h1>Rock Paper Scissor UI</h1>
-        <div class="score-container">
-            <div class="score" id="player"></div>
-            <div class="score" id="computer"></div>
+        <script type="module" src="script.js" defer></script>
+        
+        <div class="header-container">
+            <div class="header">
+                <div class="title">Rock Paper Scissors</div>
+            </div>
         </div>
-        <div class="message"></div>
-        <div class="btn-container">
-            <button class="btn" id="rock">Rock</button>
-            <button class="btn" id="paper">Paper</button>
-            <button class="btn" id="scissors">Scissors</button>
+        <div class="scores-info-container">
+            <div class="title">Scores</div>
+            <div class="scores-container">
+                <div class="player-left">
+                    <div>Player</div>
+                    <img class="small-choice-icon">
+                </div>
+                <div class="score-text"></div>
+                <div class="player-right">
+                    <div>Computer</div>
+                    <img class="small-choice-icon">
+                </div>
+            </div>
+            <div class="result-message"></div>
         </div>
+        <div class="buttons-container">
+            <div class="buttons">
+                <button data-choice="rock" class="button-icon">
+                    <img class="choice-icon" src="images/rock.png">
+                </button>
+                <button data-choice="paper" class="button-icon">
+                    <img class="choice-icon" src="images/paper.png">
+                </button>
+                <button data-choice="scissors" class="button-icon">
+                    <img class="choice-icon" src="images/scissors.png">
+                </button>
+            </div>
+        </div>
+        <div class="footer">
+            Copyright ©
+            <script>
+                document.write(new Date().getFullYear());
+            </script>
+        </div>
+        <div class="modal">
+            <div class="modal-text"></div>
+            <button class="modal-button">PLAY AGAIN</button>
+        </div>
+        <div class="overlay"></div>
     </body>
 </html>
