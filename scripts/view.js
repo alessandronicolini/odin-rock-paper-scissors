@@ -11,7 +11,7 @@ export default class View {
             text: this._getDomElement('.modal-text'),
             button: this._getDomElement('.modal-button'),
         }
-        this._imagesFolder = '../images';
+        this._imagesFolder = './images';
         this.initializeView();
     }
 
